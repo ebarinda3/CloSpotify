@@ -9,8 +9,9 @@ if(isset($_POST['loginButton'])){
 if(isset($_POST['registerButton'])){
 
     //Register button was pressed
+    $username = $_POST['username'];
+    $username = strip_tags($username);
 
-    echo"Register Button was pressed";
 }
 
 ?>
