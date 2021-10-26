@@ -1,19 +1,6 @@
 <?php
-
-if(isset($_POST['loginButton'])){
-
-    //Login button was pressed
-}
-
-
-if(isset($_POST['registerButton'])){
-
-    //Register button was pressed
-    $username = $_POST['username'];
-    $username = strip_tags($username);
-
-}
-
+    include("includes/handlers/register-handler.php");
+    include("includes/handlers/login-handler.php");
 ?>
 
 <!DOCTYPE html>
@@ -55,8 +42,8 @@ if(isset($_POST['registerButton'])){
                </p>
 
                <p>
-                    <label for="LastName">Last Name</label>
-                    <input id="LastName" name="LastName" type="text" placeholder="e.g Reddington" required>
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" name="lastName" type="text" placeholder="e.g Reddington" required>
                </p>
 
                <p>
