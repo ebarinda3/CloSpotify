@@ -22,23 +22,7 @@ function sanitizeFormPassword($inputText){
     return $inputText;
 }
 
-function validateUsername($un){
 
-}
-
-function validateFirstName($fn){
-    
-}
-function validateLastName($ln){
-    
-}
-function validateEmails($em, $em2){
-    
-}
-
-function validatePasswords($pswd, $pswd2){
-    
-}
 
 
 
@@ -88,13 +72,7 @@ if(isset($_POST['registerButton'])){
     // $cpassword = str_replace(" ","", $cpassword);
     // $cpassword = ucfirst(strtolower($cpassword));
 
-    validateUsername($username);
-    validateFirstName($firstName);
-    validateLastName($lastName);
-    validateEmails($email, $cemail);
-    validatePasswords($password, $cpassword);
-
-
+    $account = new Account();
 }
 
 ?>
