@@ -72,7 +72,11 @@ if(isset($_POST['registerButton'])){
     // $cpassword = str_replace(" ","", $cpassword);
     // $cpassword = ucfirst(strtolower($cpassword));
 
-    $account = new Account();
+    $wasSuccessful = $account->register($username, $firstName, $lastName, $email, $cemail, $password, $cpassword);
+
+    if($wasSuccessful ==true){
+        header("Location: index.php");
+    }
 }
 
 ?>
