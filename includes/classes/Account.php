@@ -20,7 +20,7 @@
             if(empty($this->errorArray) == true){
 
                 //Insert into db
-                return true;
+                return $this->insertUserDetails($un, $fn, $ln, $em, $pswd);
             }
             else{
                 return false;
@@ -35,8 +35,14 @@
             return "<span class='errorMessage'>$error</span>";
         }
 
-        private function insertUserDetails(($un, $fn, $ln, $em, $pswd){
+        private function insertUserDetails($un, $fn, $ln, $em, $pswd){
+            $encryptedPw = md5($pswd);
+            $profilePic = "assets/images/profile-pics/profile.png";
+            $date = date("Y-m-d");
 
+            $result = mysqli_query($this->con,"INSERT INTO users VALUES ('', '$un','$fn','$ln','$em','$encryptedPw', '$date', '$profilePic')");
+           
+            return $result;
 
         }
 
@@ -47,7 +53,11 @@
 
             }
 
-            //TODO : check if the username exist
+            $checkUsernameQuery = mysqli_query($this->con,"SELECT username FROM users WHERE username='$un'");
+            if(mysqli_num_rows($checkUsernameQuery) != 0){
+                array_push($this->errorArray, Constants::$usernameTaken);
+                return;
+            }
 
         }
         
