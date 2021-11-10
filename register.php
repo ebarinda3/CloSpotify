@@ -1,10 +1,19 @@
 <?php
+    include("includes/config.php");
     include("includes/classes/Account.php");
+    include("includes/classes/Constants.php");
 
-    $account = new Account();
+    $account = new Account($con);
     
     include("includes/handlers/register-handler.php");
     include("includes/handlers/login-handler.php");
+
+    function getInputValue($name){
+        if(isset($_POST[$name])){
+            echo $_POST[$name];
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +31,7 @@
             <h2>Login to your account</h2>
                 <p>
                     <label for="loginUsername">Username</label>
-                    <input id="loginUsername" name="loginUsername" type="text" placeholder="e.g raymond.reddington" required>
+                    <input id="loginUsername" name="loginUsername" type="text"  placeholder="e.g raymond.reddington" required>
                </p>
                <p>
                    <label for="loginPassword">Password</label>
@@ -38,31 +47,31 @@
                 <p>
                     <?php echo $account->getError("Your username must be between 5 and 25 characters");?>
                     <label for="username">Username</label>
-                    <input id="username" name="username" type="text" placeholder="e.g raymond.reddington" required>
+                    <input id="username" name="username" type="text" value="<?php getInputValue('username')?>" placeholder="e.g raymond.reddington" required>
                </p>
 
                <p>
                     <?php echo $account->getError("Your firstname must be between 2 and 25 characters");?>
                     <label for="firstName">First Name</label>
-                    <input id="firstName" name="firstName" type="text" placeholder="e.g Raymond" required>
+                    <input id="firstName" name="firstName" type="text" value="<?php getInputValue('firstName')?>" placeholder="e.g Raymond" required>
                </p>
 
                <p>
                     <?php echo $account->getError("Your lastname must be between 2 and 25 characters");?>
                     <label for="lastName">Last Name</label>
-                    <input id="lastName" name="lastName" type="text" placeholder="e.g Reddington" required>
+                    <input id="lastName" name="lastName" type="text" value="<?php getInputValue('lastName')?>" placeholder="e.g Reddington" required>
                </p>
 
                <p>
                     <?php echo $account->getError("Your email don't match");?>
                     <?php echo $account->getError("Emails is invalid");?>
                     <label for="email">Email</label>
-                    <input id="email" name="email" type="email" placeholder="e.g raymond.reddington@blacklist.tv" required>
+                    <input id="email" name="email" type="email" value="<?php getInputValue('email')?>" placeholder="e.g raymond.reddington@blacklist.tv" required>
                </p>
 
                <p>
                     <label for="cemail">Confirm Email</label>
-                    <input id="cemail" name="cemail" type="email" placeholder="e.g raymond.reddington@blacklist.tv" required>
+                    <input id="cemail" name="cemail" type="email" value="<?php getInputValue('cemail')?>" placeholder="e.g raymond.reddington@blacklist.tv" required>
                </p>
 
                <p>
