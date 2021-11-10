@@ -9,6 +9,24 @@
             $this->errorArray = array();
 
         }
+
+        public function login($un, $pswd){
+
+            $pswd = md5($pswd);
+
+            $query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$pswd'");
+
+            if(mysqli_num_rows($query) == 1){
+                return true;
+            }
+            else {
+                array_push($this->errorArray, Constants::$loginFailed);
+                return false;
+            }
+
+        }
+
+
         public function register($un, $fn, $ln, $em, $em2, $pswd, $pswd2){
 
             $this->validateUsername($un);
@@ -88,7 +106,14 @@
                 return;
             }
             
-            //TODO: Check that username hasn't already been used
+            //Check that username hasn't already been used
+
+            $checkemailQuery = mysqli_query($this->con,"SELECT email FROM users WHERE email='$em'");
+            if(mysqli_num_rows($checkemailQuery) != 0){
+                array_push($this->errorArray, Constants::$emailTaken);
+                return;
+            }
+
 
         }
         
