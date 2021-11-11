@@ -14,7 +14,7 @@
 
             $pswd = md5($pswd);
 
-            $query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$pswd'");
+            $query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password ='$pswd'");
 
             if(mysqli_num_rows($query) == 1){
                 return true;
