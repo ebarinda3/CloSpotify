@@ -22,23 +22,15 @@ else {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
+	<div id="mainContainer">
+
+	<div id="topContainer">
+
+		<?php include("includes/navBarContainer.php")?>
+
+	</div>
     
-    <div id="nowPlayingBarContainer">
-        <div id="nowPlayingBar">
-            <div id="nowPlayingLeft">
-
-            </div>
-            <div id="nowPlayingCenter">
-                
-            </div>
-            <div id="nowPlayingRight">
-                
-            </div>
-
-        </div>
-
-    </div>
-
+		<?php include("includes/nowPlayingBar.php")?>
 
 </body>
 </html>
