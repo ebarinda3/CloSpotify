@@ -1,3 +1,72 @@
+<?php
+$songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
+
+$resultArray = array();
+
+while($row = mysqli_fetch_array($songQuery)) {
+	array_push($resultArray, $row['id']);
+}
+
+$jsonArray = json_encode($resultArray);
+?>
+
+<script>
+
+$(document).ready(function() {
+	currentPlaylist = <?php echo $jsonArray; ?>;
+	audioElement = new Audio();
+	setTrack(currentPlaylist[0], currentPlaylist, false);
+});
+
+
+function setTrack(trackId, newPlaylist, play) {
+
+	$.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
+
+		var track = JSON.parse(data);
+		$(".trackName span").text(track.title);
+
+		$.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
+			var artist = JSON.parse(data);
+			$(".artistName span").text(artist.name);
+		});
+
+		$.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
+			var album = JSON.parse(data);
+			$(".albumLink img").attr("src", album.artworkPath);
+		});
+
+
+		audioElement.setTrack(track);
+		playSong();
+	});
+
+	if(play == true) {
+		audioElement.play();
+	}
+}
+
+function playSong() {
+
+	if(audioElement.audio.currentTime == 0) {
+		$.post("includes/handlers/ajax/updatePlays.php", { songId: audioElement.currentlyPlaying.id });
+	}
+
+	$(".controlButton.play").hide();
+	$(".controlButton.pause").show();
+	audioElement.play();
+}
+
+function pauseSong() {
+	$(".controlButton.play").show();
+	$(".controlButton.pause").hide();
+	audioElement.pause();
+}
+
+</script>
+
+
+
 <div id="nowPlayingBarContainer">
     <div id="nowPlayingBar">
         <div id="nowPlayingLeft">
@@ -9,11 +78,11 @@
                 <div class="trackInfo">
 
                     <span class="trackName">
-                        <span>Happy Birthday</span>
+                        <span></span>
                     </span>
 
                     <span class="artistName">
-                        <span>Ebenezer BARINDA</span>
+                        <span></span>
                     </span>
 
                 </div>
@@ -32,11 +101,11 @@
                         <img src="assets/images/icons/previous.png" alt="Previous">
                     </button>
 
-                    <button class="controlButton play" title="Play button">
+                    <button class="controlButton play" title="Play button" onclick="playSong()">
                         <img src="assets/images/icons/play.png" alt="Play">
                     </button>
 
-                    <button class="controlButton pause" title="Pause button" style="display: none;">
+                    <button class="controlButton pause" title="Pause button" style="display: none;" onclick="pauseSong()">
                         <img src="assets/images/icons/pause.png" alt="Pause">
                     </button>
 
