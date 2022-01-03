@@ -1,5 +1,7 @@
 <?php
 include("includes/includedFiles.php");
+// Turn off all error reporting
+ //error_reporting(0);
 ?>
 
 <div class="playlistsContainer">
