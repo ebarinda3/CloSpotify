@@ -1,14 +1,12 @@
 <?php
-    ob_start();
-    session_start();
+	ob_start();
+	session_start();
 
-    $timezone = date_default_timezone_set("America/New_York");
+	$timezone = date_default_timezone_set("Europe/London");
 
-    $con = mysqli_connect("localhost", "root", "", "cloSpotify"); 
+	$con = mysqli_connect("localhost", "root", "", "CloSpotify");
 
-    if(mysqli_connect_errno()){
-        echo "Failed to connect: ". mysqli_connect_errno();
-    }
-
-
+	if(mysqli_connect_errno()) {
+		echo "Failed to connect: " . mysqli_connect_errno();
+	}
 ?>

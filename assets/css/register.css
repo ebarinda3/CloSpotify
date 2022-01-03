@@ -5,6 +5,10 @@ body {
 	height: 100%;
 }
 
+*:focus {
+    outline: none;
+}
+
 #background {
 	background-color: #000;
     background-image: url(../images/bg.jpg);
@@ -29,6 +33,7 @@ body {
 	position: relative;
 	max-width: 1024px;
 }
+
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    #fff;
 }
@@ -74,6 +79,7 @@ body {
 	color: #a0a0a0;
     font-size: 13px;
     margin-top: 15px;
+    display: block;
 }
 
 #inputContainer button {
@@ -92,6 +98,7 @@ body {
 #inputContainer button:hover {
 	cursor: pointer;
 }
+
 .hasAccountText span {
 	font-weight: bold;
     font-size: 12px;
@@ -106,6 +113,7 @@ body {
 #loginForm {
 	display: none;
 }
+
 #loginText {
     padding: 45px;
     display: table-cell;
